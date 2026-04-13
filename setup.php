@@ -12,7 +12,7 @@
 require_once __DIR__ . '/config/database.php';
 
 define('APP_NAME',    'Municipal Employee Information System');
-define('BASE_URL',    '/Employee_InfoSys');
+define('BASE_URL',    getenv('BASE_URL') !== false ? getenv('BASE_URL') : '/Employee_InfoSys');
 
 // ---------------------------------------------------------------------------
 // Lock: refuse to run if an admin user already exists in the database
@@ -20,7 +20,7 @@ define('BASE_URL',    '/Employee_InfoSys');
 $alreadyInstalled = false;
 try {
     $checkPdo = new PDO(
-        "mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8mb4",
+        "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";dbname=" . DB_NAME . ";charset=utf8mb4",
         DB_USER, DB_PASS,
         [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
     );
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         try {
             // Create the database if it doesn't exist
             $pdo = new PDO(
-                "mysql:host=" . DB_HOST . ";charset=utf8mb4",
+                "mysql:host=" . DB_HOST . ";port=" . DB_PORT . ";charset=utf8mb4",
                 DB_USER, DB_PASS,
                 [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
             );
