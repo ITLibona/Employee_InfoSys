@@ -7,7 +7,7 @@ require_once __DIR__ . '/database.php';
 define('APP_NAME',    'Municipal Employee Information System');
 define('APP_SHORT',   'MEIS');
 define('MUNICIPALITY','Municipality of Libona');
-define('BASE_URL',    getenv('BASE_URL') ?: '/Employee_InfoSys');
+define('BASE_URL',    getenv('BASE_URL') !== false ? getenv('BASE_URL') : '/Employee_InfoSys');
 define('APP_URL',     getenv('APP_URL') ?: 'http://192.168.1.66/Employee_InfoSys'); // Production: full domain, Dev: IP/localhost
 define('ROOT_PATH',   dirname(__DIR__));
 define('UPLOAD_DIR',  ROOT_PATH . '/uploads/photos/');
