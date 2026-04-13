@@ -1,0 +1,32 @@
+/* =========================================================
+   Employee Portal — Additional Styles
+   ========================================================= */
+
+.portal-body {
+    background-color: #f0f2f5;
+}
+
+/* Portal has no sidebar — just top-nav offset */
+.portal-main {
+    margin-top: 56px; /* matches --navbar-height */
+    min-height: calc(100vh - 56px);
+}
+
+/* Stat icon boxes reused from main app */
+.icon-box {
+    width          : 56px;
+    height         : 56px;
+    border-radius  : 12px;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+    font-size      : 1.4rem;
+    flex-shrink    : 0;
+}
+
+/* Navbar active link override for portal (no sidebar active) */
+#topNavbar .nav-link.active {
+    color           : #fff !important;
+    font-weight     : 600;
+    border-bottom   : 2px solid rgba(255,255,255,.8);
+}

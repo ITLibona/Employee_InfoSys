@@ -1,0 +1,28 @@
+# Environment & Config
+.env
+.env.local
+.env.*.local
+config/database_local.php
+
+# Uploads & Temporary files
+uploads/photos/*
+!uploads/photos/index.php
+uploads/
+.DS_Store
+Thumbs.db
+
+# Development & IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.log
+
+# OS specific
+.env.production
+.env.production.local
+
+# Sensitive files  
+*.key
+*.pem
