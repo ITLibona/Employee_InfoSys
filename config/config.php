@@ -7,7 +7,16 @@ require_once __DIR__ . '/database.php';
 define('APP_NAME',    'Municipal Employee Information System');
 define('APP_SHORT',   'MEIS');
 define('MUNICIPALITY','Municipality of Libona');
-define('BASE_URL',    getenv('BASE_URL') !== false ? getenv('BASE_URL') : '/Employee_InfoSys');
+
+$baseUrlEnv = getenv('BASE_URL');
+if ($baseUrlEnv !== false) {
+    $resolvedBaseUrl = rtrim($baseUrlEnv, '/');
+} else {
+    // Auto-detect base path from current script; works for both subfolder and root deployments.
+    $scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+    $resolvedBaseUrl = ($scriptDir === '/' || $scriptDir === '.') ? '' : rtrim($scriptDir, '/');
+}
+define('BASE_URL', $resolvedBaseUrl);
 define('APP_URL',     getenv('APP_URL') ?: 'http://192.168.1.66/Employee_InfoSys'); // Production: full domain, Dev: IP/localhost
 define('ROOT_PATH',   dirname(__DIR__));
 define('UPLOAD_DIR',  ROOT_PATH . '/uploads/photos/');

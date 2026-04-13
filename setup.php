@@ -12,7 +12,15 @@
 require_once __DIR__ . '/config/database.php';
 
 define('APP_NAME',    'Municipal Employee Information System');
-define('BASE_URL',    getenv('BASE_URL') !== false ? getenv('BASE_URL') : '/Employee_InfoSys');
+
+$baseUrlEnv = getenv('BASE_URL');
+if ($baseUrlEnv !== false) {
+    $resolvedBaseUrl = rtrim($baseUrlEnv, '/');
+} else {
+    $scriptDir = str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'] ?? '/'));
+    $resolvedBaseUrl = ($scriptDir === '/' || $scriptDir === '.') ? '' : rtrim($scriptDir, '/');
+}
+define('BASE_URL', $resolvedBaseUrl);
 
 // ---------------------------------------------------------------------------
 // Lock: refuse to run if an admin user already exists in the database
