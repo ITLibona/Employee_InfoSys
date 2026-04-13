@@ -5,7 +5,6 @@
   },
   "deploy": {
     "numReplicas": 1,
-    "startCommand": "apache2-foreground",
     "restartPolicyType": "ON_FAILURE",
     "restartPolicyMaxRetries": 10
   }

@@ -1,18 +1,14 @@
-FROM php:8.2-apache
+FROM php:8.2-cli
 
 # Install PDO MySQL driver required by the application.
 RUN docker-php-ext-install pdo pdo_mysql
 
-# Enable Apache rewrite support.
-RUN a2enmod rewrite
+WORKDIR /app
+COPY . /app/
 
-WORKDIR /var/www/html
-COPY . /var/www/html/
+# Ensure uploads directory exists and is writable.
+RUN mkdir -p /app/uploads/photos \
+    && chmod -R 775 /app/uploads
 
-# Ensure uploads directory exists and is writable by the web server user.
-RUN mkdir -p /var/www/html/uploads/photos \
-    && chown -R www-data:www-data /var/www/html/uploads \
-    && chmod -R 775 /var/www/html/uploads
-
-EXPOSE 80
-CMD ["apache2-foreground"]
+EXPOSE 8080
+CMD ["sh", "-c", "php -S 0.0.0.0:${PORT:-8080} -t /app"]
